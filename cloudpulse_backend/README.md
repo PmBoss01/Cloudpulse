@@ -79,6 +79,23 @@ python manage.py shell
 python manage.py test
 ```
 
+## Formatting & linting
+
+Install dev tools once with `pip install -r requirements-dev.txt`, then:
+
+```bash
+black .              # auto-format
+isort .              # sort imports
+flake8 .             # lint
+
+# CI-equivalent checks (no changes written)
+black --check .
+isort --check-only .
+flake8 .
+```
+
+These same checks run in CI on every push to `dev` and every PR into `main`.
+
 ## Project structure
 
 ```
