@@ -38,11 +38,16 @@ The app is now available at `http://localhost:3000/`.
 ## Everyday commands
 
 ```bash
-npm run dev       # dev server with hot reload
-npm run build     # production build (also catches type errors)
-npm run start     # run a production build locally
-npm run lint      # eslint
+npm run dev            # dev server with hot reload
+npm run build          # production build (also catches type errors)
+npm run start          # run a production build locally
+npm run lint           # eslint
+npm run typecheck      # tsc --noEmit
+npm run format         # prettier --write
+npm run format:check   # prettier --check (used in CI)
 ```
+
+These same checks (format, lint, typecheck, build) run in CI on every push to `dev` and every PR into `main`.
 
 ## Project structure
 
