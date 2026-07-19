@@ -12,3 +12,12 @@ DATABASES = {
 }
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost:3000"])
+
+# If EMAIL_HOST is set in .env, send real emails via SMTP even in dev (handy
+# for testing password resets end-to-end). Otherwise fall back to printing
+# emails to the runserver console — no credentials needed.
+EMAIL_BACKEND = (
+    "django.core.mail.backends.smtp.EmailBackend"
+    if EMAIL_HOST  # noqa: F405
+    else "django.core.mail.backends.console.EmailBackend"
+)
