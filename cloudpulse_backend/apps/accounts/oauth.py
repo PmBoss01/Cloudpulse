@@ -63,9 +63,7 @@ class GoogleLoginView(APIView):
             "prompt": "select_account",
         }
         response = HttpResponseRedirect(f"{GOOGLE_AUTH_URL}?{urlencode(params)}")
-        response.set_cookie(
-            "oauth_state_google", state, max_age=600, httponly=True, samesite="Lax"
-        )
+        response.set_cookie("oauth_state_google", state, max_age=600, httponly=True, samesite="Lax")
         return response
 
 
@@ -129,9 +127,7 @@ class GitHubLoginView(APIView):
             "state": state,
         }
         response = HttpResponseRedirect(f"{GITHUB_AUTH_URL}?{urlencode(params)}")
-        response.set_cookie(
-            "oauth_state_github", state, max_age=600, httponly=True, samesite="Lax"
-        )
+        response.set_cookie("oauth_state_github", state, max_age=600, httponly=True, samesite="Lax")
         return response
 
 
@@ -171,7 +167,9 @@ class GitHubCallbackView(APIView):
             "Accept": "application/json",
             "User-Agent": "CloudPulse",
         }
-        profile_response = requests.get(GITHUB_USER_URL, headers=auth_headers, timeout=REQUEST_TIMEOUT)
+        profile_response = requests.get(
+            GITHUB_USER_URL, headers=auth_headers, timeout=REQUEST_TIMEOUT
+        )
         if not profile_response.ok:
             return _error_redirect("profile_fetch_failed")
         profile = profile_response.json()
@@ -183,7 +181,9 @@ class GitHubCallbackView(APIView):
             )
             if emails_response.ok:
                 candidates = emails_response.json()
-                primary = next((e for e in candidates if e.get("primary") and e.get("verified")), None)
+                primary = next(
+                    (e for e in candidates if e.get("primary") and e.get("verified")), None
+                )
                 verified = next((e for e in candidates if e.get("verified")), None)
                 chosen = primary or verified
                 email = chosen["email"] if chosen else None
