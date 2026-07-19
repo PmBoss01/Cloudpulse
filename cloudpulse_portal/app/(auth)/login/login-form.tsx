@@ -36,7 +36,9 @@ export function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState<string | null>(
-    oauthErrorCode ? (OAUTH_ERROR_MESSAGES[oauthErrorCode] ?? "Something went wrong signing you in.") : null,
+    oauthErrorCode
+      ? (OAUTH_ERROR_MESSAGES[oauthErrorCode] ?? "Something went wrong signing you in.")
+      : null,
   );
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
