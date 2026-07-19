@@ -10,6 +10,10 @@ DATABASES = {
 
 CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=[])
 
+# Real email delivery is required in production — EMAIL_HOST etc. are read
+# from the environment in settings/base.py; fail loudly if they're missing.
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
